@@ -4,22 +4,8 @@
 <meta charset="UTF-8">
 <title>Googel Ad</title>
 <style>
-    body {
-        margin:0;
-        padding:0;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        height:100%;
-        background:transparent;
-    }
-    a img {
-        display:block;
-        width:100%;
-        height:100%;
-        border:none;
-        border-radius:6px;
-    }
+body { margin:0; padding:0; display:flex; justify-content:center; align-items:center; height:100%; background:transparent; }
+img { display:block; width:100%; height:100%; border:none; border-radius:6px; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -65,18 +51,25 @@ async function loadAd() {
         return;
     }
 
-    // pick random ad
     const ad = ads[Math.floor(Math.random()*ads.length)];
 
-    const adHtml = `<a href="${ad.targetURL}" target="_blank">
-                        <img src="${ad.base64Image}" alt="${ad.title}">
-                    </a>`;
+    // ✅ Fix missing protocol
+    let url = ad.targetURL.trim();
+    if(!/^https?:\/\//i.test(url)){
+        url = 'https://' + url;
+    }
 
-    document.getElementById("adContainer").innerHTML=adHtml;
+    const img = document.createElement('img');
+    img.src = ad.base64Image;
+    img.alt = ad.title;
+    img.onclick = () => window.open(url, '_blank'); // ensures correct site opens
+
+    const container = document.getElementById("adContainer");
+    container.innerHTML = "";
+    container.appendChild(img);
 }
 
 loadAd();
-
 </script>
 
 </body>
