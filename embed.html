@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Googel Ad</title>
+<style>
+    body {
+        margin:0;
+        padding:0;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100%;
+        background:transparent;
+    }
+    a img {
+        display:block;
+        width:100%;
+        height:100%;
+        border:none;
+        border-radius:6px;
+    }
+</style>
+</head>
+<body>
+
+<div id="adContainer"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+// ------------------- FIREBASE CONFIG -------------------
+const firebaseConfig = {
+    apiKey: "AIzaSyD0NR98wFcLMYvEodcutKEZN-IQowZowS0",
+    authDomain: "googelads-2f706.firebaseapp.com",
+    projectId: "googelads-2f706",
+    storageBucket: "googelads-2f706.appspot.com",
+    messagingSenderId: "261049470494",
+    appId: "1:261049470494:web:34c85ebe1fe50c23eca80f",
+    measurementId: "G-1WLFT147GZ"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ------------------- GET QUERY PARAM -------------------
+function getParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+const type = getParam('type') || 'side';
+
+// ------------------- FETCH ADS -------------------
+async function loadAd() {
+    const adsCol = collection(db,"ads");
+    const q = query(adsCol, where("type","==",type));
+    const snap = await getDocs(q);
+    const ads = [];
+    snap.forEach(docSnap => ads.push(docSnap.data()));
+
+    if(ads.length===0){
+        document.getElementById("adContainer").innerHTML="<p>No ads available</p>";
+        return;
+    }
+
+    // pick random ad
+    const ad = ads[Math.floor(Math.random()*ads.length)];
+
+    const adHtml = `<a href="${ad.targetURL}" target="_blank">
+                        <img src="${ad.base64Image}" alt="${ad.title}">
+                    </a>`;
+
+    document.getElementById("adContainer").innerHTML=adHtml;
+}
+
+loadAd();
+
+</script>
+
+</body>
+</html>
