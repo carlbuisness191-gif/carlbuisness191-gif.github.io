@@ -32,51 +32,65 @@ const db = getFirestore(app);
 
 // ------------------- GET QUERY PARAM -------------------
 function getParam(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    } catch(e) {
+        return null;
+    }
 }
 
-// Get types as array
-let typesParam = getParam('type') || 'side';
-const types = typesParam.split(',').map(t => t.trim().toLowerCase());
-
-// ------------------- FETCH ADS -------------------
+// ------------------- MAIN -------------------
 async function loadAd() {
-    const adsCol = collection(db,"ads");
-    const snap = await getDocs(adsCol);
-    const ads = [];
+    const typeParam = getParam('type') || 'side';
+    const types = typeParam.split(',').map(t=>t.trim().toLowerCase()).filter(t=>t); // remove empty
 
-    snap.forEach(docSnap=>{
-        const ad = docSnap.data();
-        if(types.includes(ad.type.toLowerCase())){
-            ads.push(ad);
-        }
-    });
-
-    if(ads.length===0){
-        document.getElementById("adContainer").innerHTML="<p>No ads available</p>";
+    if(types.length===0){
+        document.getElementById("adContainer").innerHTML="<p>No valid type specified</p>";
         return;
     }
 
-    // Pick random ad from filtered list
-    const ad = ads[Math.floor(Math.random() * ads.length)];
+    try {
+        const snap = await getDocs(collection(db,"ads"));
+        const ads = [];
+        snap.forEach(docSnap=>{
+            const ad = docSnap.data();
+            // Only include ads whose type matches any of the types
+            if(types.includes(ad.type.toLowerCase())){
+                ads.push(ad);
+            }
+        });
 
-    // Fix missing protocol
-    let url = ad.targetURL.trim();
-    if(!/^https?:\/\//i.test(url)){
-        url = 'https://' + url;
+        if(ads.length===0){
+            document.getElementById("adContainer").innerHTML="<p>No ads available</p>";
+            return;
+        }
+
+        // Pick a random ad
+        const ad = ads[Math.floor(Math.random() * ads.length)];
+
+        // Fix URL if missing protocol
+        let url = ad.targetURL.trim();
+        if(!/^https?:\/\//i.test(url)){
+            url = 'https://' + url;
+        }
+
+        const img = document.createElement('img');
+        img.src = ad.base64Image;
+        img.alt = ad.title;
+        img.onclick = ()=> window.open(url,'_blank');
+
+        const container = document.getElementById("adContainer");
+        container.innerHTML="";
+        container.appendChild(img);
+
+    } catch(err){
+        console.error(err);
+        document.getElementById("adContainer").innerHTML="<p>Error loading ad</p>";
     }
-
-    const img = document.createElement('img');
-    img.src = ad.base64Image;
-    img.alt = ad.title;
-    img.onclick = () => window.open(url,'_blank');
-
-    const container = document.getElementById("adContainer");
-    container.innerHTML="";
-    container.appendChild(img);
 }
 
+// ------------------- IGNORE ID -------------------
 loadAd();
 </script>
 
