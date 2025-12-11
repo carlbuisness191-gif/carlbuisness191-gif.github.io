@@ -2,19 +2,79 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Googel Ad</title>
+<title>Googel Ads Full System</title>
 <style>
-body { margin:0; padding:0; display:flex; justify-content:center; align-items:center; height:100%; background:transparent; }
-img { display:block; width:100%; height:100%; border:none; border-radius:6px; cursor:pointer; }
+body { font-family: Arial,sans-serif; background:#eef1f5; margin:0; padding:0; display:flex; justify-content:center; min-height:100vh; }
+.container { width:100%; max-width:600px; background:white; padding:20px; margin-top:40px; border-radius:12px; box-shadow:0px 5px 25px rgba(0,0,0,0.15); }
+h2,h3 { text-align:center; color:#333; }
+input, select { width:100%; padding:10px; border-radius:6px; border:1px solid #ccc; margin-bottom:10px; font-size:15px; }
+button { padding:10px 15px; border:none; border-radius:6px; cursor:pointer; font-size:15px; }
+.btn-primary { background:#4285f4; color:white; width:100%; margin-bottom:10px; }
+.btn-secondary { background:#ddd; width:48%; color:#333; }
+.nav-btns { display:flex; justify-content:space-between; margin-bottom:20px; }
+.hidden { display:none; }
+.card { border:1px solid #ddd; background:#fafafa; padding:15px; border-radius:8px; margin-bottom:12px; }
+img { border-radius:6px; }
 </style>
 </head>
 <body>
 
-<div id="adContainer"></div>
+<div class="container">
 
+<h2>Googel Ads System</h2>
+
+<!-- LOGIN / SIGNUP -->
+<div id="loginArea">
+<h3>Sign In / Register</h3>
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<button class="btn-primary" id="loginBtn">Login</button>
+<button class="btn-secondary" style="width:100%" id="registerBtn">Register</button>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+<button class="btn-primary" id="logoutBtn">Logout</button>
+
+<div class="nav-btns">
+    <button class="btn-secondary" id="btnDocs">API Docs</button>
+    <button class="btn-secondary" id="btnMaker">Ad Maker</button>
+</div>
+
+<!-- API DOCS -->
+<div id="docs" class="hidden">
+<h3>API Documentation</h3>
+<p><b>Side Ad</b></p>
+<code>&lt;iframe src="embed.html?type=side" style="border:0;width:160px;height:600px;"&gt;&lt;/iframe&gt;</code>
+<p><b>Bottom Ad</b></p>
+<code>&lt;iframe src="embed.html?type=bottom" style="border:0;width:100%;height:90px;"&gt;&lt;/iframe&gt;</code>
+<p><b>Square Ad</b></p>
+<code>&lt;iframe src="embed.html?type=square" style="border:0;width:250px;height:250px;"&gt;&lt;/iframe&gt;</code>
+</div>
+
+<!-- AD MAKER -->
+<div id="maker" class="hidden">
+<h3>Create Ad</h3>
+<select id="adType">
+<option value="side">Side</option>
+<option value="square">Square</option>
+<option value="bottom">Bottom</option>
+</select>
+<input id="adTitle" placeholder="Ad Title">
+<input id="adURL" placeholder="Click URL">
+<input type="file" id="adImage">
+<button class="btn-primary" id="createAdBtn">Create Ad</button>
+
+<h3>Your Ads</h3>
+<div id="adList"></div>
+</div>
+
+</div>
+
+<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, doc, getDoc, setDoc, query, where, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 // ------------------- FIREBASE CONFIG -------------------
 const firebaseConfig = {
@@ -30,47 +90,122 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// ------------------- GET QUERY PARAM -------------------
-function getParam(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
+// ------------------- HELPERS -------------------
+function fileToBase64(file){
+    return new Promise((res,rej)=>{
+        const reader = new FileReader();
+        reader.onloadend=()=>res(reader.result);
+        reader.onerror=rej;
+        reader.readAsDataURL(file);
+    });
 }
 
-const type = getParam('type') || 'side';
+let currentUser=null;
 
-// ------------------- FETCH ADS -------------------
-async function loadAd() {
-    const adsCol = collection(db,"ads");
-    const q = query(adsCol, where("type","==",type));
-    const snap = await getDocs(q);
-    const ads = [];
-    snap.forEach(docSnap => ads.push(docSnap.data()));
+// ------------------- AUTH -------------------
+document.getElementById("registerBtn").onclick = async ()=>{
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    if(!email||!password){alert("Fill email/password"); return;}
+    const userDoc = doc(db,"users",email);
+    const snap = await getDoc(userDoc);
+    if(snap.exists()){alert("Email already exists"); return;}
+    await setDoc(userDoc,{email,password});
+    alert("Account created!");
+};
 
-    if(ads.length===0){
-        document.getElementById("adContainer").innerHTML="<p>No ads available</p>";
-        return;
-    }
+document.getElementById("loginBtn").onclick = async ()=>{
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    if(!email||!password){alert("Fill email/password"); return;}
+    const snap = await getDoc(doc(db,"users",email));
+    if(!snap.exists()){alert("Email not found"); return;}
+    if(snap.data().password!==password){alert("Wrong password"); return;}
+    currentUser = email;
+    document.getElementById("loginArea").style.display="none";
+    document.getElementById("app").style.display="block";
+};
 
-    const ad = ads[Math.floor(Math.random()*ads.length)];
+document.getElementById("logoutBtn").onclick = ()=>{
+    currentUser=null;
+    document.getElementById("loginArea").style.display="block";
+    document.getElementById("app").style.display="none";
+};
 
-    // ✅ Fix missing protocol
-    let url = ad.targetURL.trim();
+// ------------------- NAV -------------------
+document.getElementById("btnDocs").onclick=()=>{
+    document.getElementById("docs").classList.remove("hidden");
+    document.getElementById("maker").classList.add("hidden");
+};
+document.getElementById("btnMaker").onclick=()=>{
+    document.getElementById("docs").classList.add("hidden");
+    document.getElementById("maker").classList.remove("hidden");
+    loadAds();
+};
+
+// ------------------- CREATE AD -------------------
+document.getElementById("createAdBtn").onclick=async()=>{
+    if(!currentUser){alert("Login first"); return;}
+    const type = document.getElementById("adType").value;
+    const title = document.getElementById("adTitle").value.trim();
+    let url = document.getElementById("adURL").value.trim();
+    const file = document.getElementById("adImage").files[0];
+    if(!title||!url||!file){alert("Fill all fields"); return;}
+
+    // ✅ fix missing protocol
     if(!/^https?:\/\//i.test(url)){
         url = 'https://' + url;
     }
 
-    const img = document.createElement('img');
-    img.src = ad.base64Image;
-    img.alt = ad.title;
-    img.onclick = () => window.open(url, '_blank'); // ensures correct site opens
+    const base64 = await fileToBase64(file);
 
-    const container = document.getElementById("adContainer");
-    container.innerHTML = "";
-    container.appendChild(img);
+    await addDoc(collection(db,"ads"),{
+        user: currentUser,
+        type,
+        title,
+        targetURL: url,
+        base64Image: base64,
+        createdAt: Date.now()
+    });
+    alert("Ad created");
+    loadAds();
+};
+
+// ------------------- LOAD ADS -------------------
+async function loadAds(){
+    if(!currentUser) return;
+    const q = query(collection(db,"ads"),where("user","==",currentUser));
+    const snap = await getDocs(q);
+    const list = document.getElementById("adList");
+    list.innerHTML="";
+    snap.forEach(docSnap=>{
+        const ad = docSnap.data();
+        const id = docSnap.id;
+        const div = document.createElement("div");
+        div.className="card";
+        div.innerHTML=`
+            <b>${ad.title}</b> (${ad.type})<br>
+            <img src="${ad.base64Image}" width="100"><br><br>
+            <button onclick="copyEmbed('${ad.type}')">Copy Embed</button>
+            <button onclick="deleteAd('${id}')">Delete</button>
+        `;
+        list.appendChild(div);
+    });
 }
 
-loadAd();
-</script>
+// ------------------- DELETE -------------------
+window.deleteAd=async(id)=>{
+    await deleteDoc(doc(db,"ads",id));
+    loadAds();
+}
 
+// ------------------- COPY EMBED -------------------
+window.copyEmbed=(type)=>{
+    const code = `<iframe src="embed.html?type=${type}" style="border:0;width:300px;height:250px;"></iframe>`;
+    navigator.clipboard.writeText(code);
+    alert("Embed code copied!");
+}
+
+</script>
 </body>
 </html>
