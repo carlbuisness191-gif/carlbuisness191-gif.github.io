@@ -36,7 +36,7 @@ function getParam(name) {
     return urlParams.get(name);
 }
 
-// Get types, split by comma, trim spaces
+// Get types as array
 let typesParam = getParam('type') || 'side';
 const types = typesParam.split(',').map(t => t.trim().toLowerCase());
 
@@ -45,24 +45,23 @@ async function loadAd() {
     const adsCol = collection(db,"ads");
     const snap = await getDocs(adsCol);
     const ads = [];
-    
+
     snap.forEach(docSnap=>{
         const ad = docSnap.data();
-        // Keep ads whose type is in the types array
         if(types.includes(ad.type.toLowerCase())){
             ads.push(ad);
         }
     });
 
-    if(ads.length === 0){
+    if(ads.length===0){
         document.getElementById("adContainer").innerHTML="<p>No ads available</p>";
         return;
     }
 
-    // pick random ad from matching types
+    // Pick random ad from filtered list
     const ad = ads[Math.floor(Math.random() * ads.length)];
 
-    // Fix URL if missing protocol
+    // Fix missing protocol
     let url = ad.targetURL.trim();
     if(!/^https?:\/\//i.test(url)){
         url = 'https://' + url;
@@ -71,10 +70,10 @@ async function loadAd() {
     const img = document.createElement('img');
     img.src = ad.base64Image;
     img.alt = ad.title;
-    img.onclick = () => window.open(url, '_blank');
+    img.onclick = () => window.open(url,'_blank');
 
     const container = document.getElementById("adContainer");
-    container.innerHTML = "";
+    container.innerHTML="";
     container.appendChild(img);
 }
 
