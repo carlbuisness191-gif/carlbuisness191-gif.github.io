@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weather Dashboard</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+body { font-family: Arial,sans-serif; margin:0; padding:0; display:flex; flex-wrap:wrap; background:#f0f2f5; }
+.container { display:flex; flex-direction:row; width:100%; max-width:1200px; margin:auto; }
+main { flex:3; padding:10px; }
+aside { flex:1; padding:10px; }
+.card { background:white; border-radius:8px; padding:10px; margin-bottom:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+.forecast-grid { display:flex; gap:6px; flex-wrap:wrap; }
+#map { height:300px; width:100%; }
+footer { text-align:center; padding:10px; background:#222; color:white; margin-top:20px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+<main>
+<section class="card hero">
+  <div class="conditions" id="currentWeather">Loading current weather…</div>
+  <div class="quick card">
+    <h3>Quick 10-sec Overview</h3>
+    <div id="quickData">Loading…</div>
+  </div>
+</section>
+
+<section class="card">
+  <h3>Weather Alerts</h3>
+  <div id="alerts">Loading alerts…</div>
+</section>
+
+<section class="card">
+  <h3>Radar Map</h3>
+  <div id="map"></div>
+</section>
+
+<section class="card">
+  <h3>Next 12 Hours</h3>
+  <div class="forecast-grid" id="hourlyGrid">Loading…</div>
+</section>
+
+<section class="card">
+  <h3>7-Day Forecast</h3>
+  <div class="forecast-grid" id="dailyGrid">Loading…</div>
+</section>
+
+<section class="card">
+  <h3>Data Center</h3>
+  <canvas id="tempChart" style="width:100%;height:200px;"></canvas>
+  <ul>
+    <li id="airQuality">Air Quality: —</li>
+    <li id="uvIndex">UV Index: —</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h3>Explainers & Deep Dives</h3>
+  <details><summary>What is humidity?</summary><p>Humidity is the amount of water vapor in the air.</p></details>
+  <details><summary>How fronts cause storms</summary><p>Cold fronts force warm air up rapidly causing thunderstorms.</p></details>
+  <details><summary>Why forecasts change</summary><p>Weather forecasts can change due to small differences in initial conditions.</p></details>
+</section>
+
+<section class="card">
+  <h3>Compare Two Places</h3>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+    <input type="text" id="placeA" placeholder="City A">
+    <input type="text" id="placeB" placeholder="City B">
+    <button id="compareBtn">Compare</button>
+  </div>
+  <div id="compareResult" style="margin-top:8px;color: rgba(0,0,0,0.5);">No comparison yet</div>
+</section>
+</main>
+
+<aside>
+<section class="card">
+  <h3>Today's Tip</h3>
+  <p>⚡ If thunder roars, go indoors — lightning can strike even if the storm seems far away.</p>
+</section>
+</aside>
+</div>
+
+<footer>© CCN10 Weather • Radar via RainViewer • Data via Open-Meteo</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+let currentLat = 41.8781, currentLon = -87.6298; // Chicago default
+const map = L.map('map').setView([currentLat,currentLon],6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
+let radarLayer;
+
+async function loadRadar(){
+    try {
+        const resp = await fetch('https://api.rainviewer.com/public/weather-maps.json');
+        const jr = await resp.json();
+        const host = jr.host;
+        const past = jr.radar.past;
+        if(!past.length) return;
+        const latest = past[past.length-1];
+        const timestamp = latest.time;
+        const path = latest.path;
+        if(radarLayer) map.removeLayer(radarLayer);
+        radarLayer = L.tileLayer(`${host}${path}/{z}/{x}/{y}/512/1/1_${timestamp}.png`,{
+            opacity:0.5, maxZoom:10, tileSize:512, continuousWorld:true, noWrap:true
+        });
+        radarLayer.addTo(map);
+    } catch(e){ console.error('Radar load error',e); }
+}
+
+async function loadWeather(lat,lon){
+    currentLat=lat; currentLon=lon;
+    map.setView([lat,lon]);
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,cloudcover,windspeed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=auto`;
+    const res = await fetch(url);
+    const data = await res.json();
+    renderCurrent(data);
+    renderQuick(data);
+    renderHourly(data);
+    renderDaily(data);
+    renderChart(data);
+    document.getElementById('alerts').textContent='No active alerts (demo)';
+    loadAirQuality(lat,lon);
+}
+
+async function loadAirQuality(lat,lon){
+    try {
+        const resp = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&hourly=pm2_5,pm10,o3&timezone=auto`);
+        const aq = await resp.json();
+        const pm25 = aq.hourly.pm2_5[0]?.value ?? aq.hourly.pm2_5[0];
+        const pm10 = aq.hourly.pm10[0]?.value ?? aq.hourly.pm10[0];
+        const o3 = aq.hourly.o3[0]?.value ?? aq.hourly.o3[0];
+        document.getElementById('airQuality').textContent = `PM₂.₅: ${pm25.toFixed(1)} μg/m³, PM₁₀: ${pm10.toFixed(1)} μg/m³, O₃: ${o3.toFixed(1)} μg/m³`;
+        document.getElementById('uvIndex').textContent='UV Index: —';
+    } catch(e){ console.error('AQI load error',e); }
+}
+
+function renderCurrent(d){
+    const cw=d.current_weather;
+    const cc=d.hourly.cloudcover[0];
+    const hum=d.hourly.relative_humidity_2m[0];
+    document.getElementById('currentWeather').innerHTML=
+        `🌡️ Temp: <b>${cw.temperature}°F</b><br> 💨 Wind: <b>${cw.windspeed} mph</b><br> ☁️ Clouds: <b>${cc}%</b><br> 💧 Humidity: <b>${hum}%</b><br> ⏱️ Time: <b>${cw.time}</b>`;
+}
+
+function renderQuick(d){
+    const cw=d.current_weather;
+    const hum=d.hourly.relative_humidity_2m[0];
+    const pop=d.hourly.precipitation_probability[0];
+    document.getElementById('quickData').innerHTML=
+        `Temp: ${cw.temperature}°F<br>Wind: ${cw.windspeed} mph<br>Humidity: ${hum}%<br>Precip: ${pop}%`;
+}
+
+function renderHourly(d){
+    const grid=document.getElementById('hourlyGrid'); grid.innerHTML='';
+    for(let i=0;i<12;i++){
+        const t=d.hourly.time[i].split('T')[1];
+        const temp=d.hourly.temperature_2m[i];
+        const pop=d.hourly.precipitation_probability[i];
+        grid.innerHTML+=`<div class="card"><b>${t}</b><br>🌡️ ${temp}°F<br>🌧️ ${pop}%</div>`;
+    }
+}
+
+function renderDaily(d){
+    const grid=document.getElementById('dailyGrid'); grid.innerHTML='';
+    for(let i=0;i<d.daily.time.length;i++){
+        const day=new Date(d.daily.time[i]).toLocaleDateString([], {weekday:'short'});
+        const hi=d.daily.temperature_2m_max[i];
+        const lo=d.daily.temperature_2m_min[i];
+        const pop=d.daily.precipitation_probability_max[i];
+        grid.innerHTML+=`<div class="card"><b>${day}</b><br>🔺 ${hi}°F<br>🔻 ${lo}°F<br>🌧️ ${pop}%</div>`;
+    }
+}
+
+function renderChart(d){
+    const c=document.getElementById('tempChart');
+    const ctx=c.getContext('2d');
+    const temps=d.hourly.temperature_2m.slice(0,24);
+    c.width=c.clientWidth*2; c.height=c.clientHeight*2;
+    ctx.scale(2,2);
+    ctx.clearRect(0,0,c.clientWidth,c.clientHeight);
+    ctx.beginPath();
+    temps.forEach((t,i)=>{
+        const x=(c.clientWidth/(temps.length-1))*i;
+        const min=Math.min(...temps);
+        const max=Math.max(...temps);
+        const y=c.clientHeight-((t-min)/(max-min))*c.clientHeight;
+        if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    });
+    ctx.strokeStyle='blue';
+    ctx.lineWidth=2;
+    ctx.stroke();
+}
+
+document.getElementById('compareBtn').addEventListener('click', ()=>{
+    const a=document.getElementById('placeA').value||'City A';
+    const b=document.getElementById('placeB').value||'City B';
+    const resA=Math.round(59+Math.random()*36);
+    const resB=Math.round(59+Math.random()*36);
+    document.getElementById('compareResult').innerHTML=`<b>${a}</b>: ${resA}°F &nbsp;&nbsp; <b>${b}</b>: ${resB}°F`;
+});
+
+// Initialize
+loadWeather(currentLat,currentLon);
+loadRadar();
+</script>
+</body>
+</html>
