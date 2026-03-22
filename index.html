@@ -11,37 +11,37 @@
 body{font-family:'Nunito',sans-serif;background:#C8A882;height:100vh;overflow:hidden;display:flex;flex-direction:column;}
 
 /* TITLE BAR */
-#title-bar{background:linear-gradient(135deg,#5C3317,#8B4513,#A0522D);padding:6px 14px;display:flex;align-items:center;gap:10px;user-select:none;box-shadow:0 2px 6px rgba(0,0,0,.35);flex-shrink:0;}
-.tl-group{display:flex;gap:6px;}
-.tl{width:12px;height:12px;border-radius:50%;}
+#title-bar{background:linear-gradient(135deg,#5C3317,#8B4513,#A0522D);padding:4px 10px;display:flex;align-items:center;gap:10px;user-select:none;box-shadow:0 2px 6px rgba(0,0,0,.35);flex-shrink:0;}
+.tl-group{display:flex;gap:5px;}
+.tl{width:10px;height:10px;border-radius:50%;}
 .tl.r{background:#FF5F57;}.tl.y{background:#FFBD2E;}.tl.g{background:#28CA42;}
-#browser-title{color:#FFF8F0;font-size:13px;font-weight:700;flex:1;text-align:center;}
-#user-pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;cursor:pointer;transition:background .15s;}
+#browser-title{color:#FFF8F0;font-size:10px;font-weight:700;flex:1;text-align:center;}
+#user-pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border-radius:20px;padding:2px 8px;cursor:pointer;transition:background .15s;}
 #user-pill:hover{background:rgba(255,255,255,.28);}
-#user-pill span{color:#FFF8F0;font-size:11px;font-weight:700;}
+#user-pill span{color:#FFF8F0;font-size:10px;font-weight:700;}
 
 /* TAB BAR */
-#tab-bar{background:linear-gradient(to bottom,#A07050,#8B6040);display:flex;align-items:flex-end;padding:6px 8px 0;gap:2px;min-height:38px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;flex-shrink:0;}
+#tab-bar{background:linear-gradient(to bottom,#A07050,#8B6040);display:flex;align-items:flex-end;padding:4px 6px 0;gap:2px;min-height:32px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;flex-shrink:0;}
 #tab-bar::-webkit-scrollbar{display:none;}
-.tab{background:var(--tab-bg);border-radius:8px 8px 0 0;padding:6px 8px 6px 10px;font-size:12px;font-weight:700;color:#5C3317;cursor:pointer;display:flex;align-items:center;gap:5px;min-width:110px;max-width:190px;white-space:nowrap;overflow:hidden;flex-shrink:0;border:1px solid rgba(0,0,0,.12);border-bottom:none;transition:background .15s;}
+.tab{background:var(--tab-bg);border-radius:8px 8px 0 0;padding:4px 8px 4px 8px;font-size:10px;font-weight:700;color:#5C3317;cursor:pointer;display:flex;align-items:center;gap:5px;min-width:90px;max-width:160px;white-space:nowrap;overflow:hidden;flex-shrink:0;border:1px solid rgba(0,0,0,.12);border-bottom:none;transition:background .15s;}
 .tab.active{background:var(--cream);color:#2C1810;}
 .tab-icon{font-size:13px;flex-shrink:0;}
 .tab-lbl{overflow:hidden;text-overflow:ellipsis;flex:1;}
 .tab-x{opacity:.4;font-size:15px;flex-shrink:0;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;transition:opacity .15s,background .15s;line-height:1;}
 .tab-x:hover{opacity:1;background:rgba(0,0,0,.18);}
-#plus-tab{background:rgba(255,255,255,.18);border:none;border-radius:6px 6px 0 0;width:30px;height:28px;cursor:pointer;font-size:20px;color:#FFF8F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;line-height:1;}
+#plus-tab{background:rgba(255,255,255,.18);border:none;border-radius:6px 6px 0 0;width:26px;height:24px;cursor:pointer;font-size:17px;color:#FFF8F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;line-height:1;}
 #plus-tab:hover{background:rgba(255,255,255,.32);}
 
 /* TOOLBAR */
-#toolbar{background:var(--cream);padding:8px 12px;display:flex;align-items:center;gap:8px;border-bottom:2px solid #D4AA7D;box-shadow:0 2px 4px rgba(0,0,0,.07);flex-shrink:0;}
-.nbtn{background:none;border:1px solid transparent;border-radius:6px;width:30px;height:30px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;color:#8B4513;transition:background .15s,border-color .15s;flex-shrink:0;}
+#toolbar{background:var(--cream);padding:5px 10px;display:flex;align-items:center;gap:6px;border-bottom:2px solid #D4AA7D;box-shadow:0 2px 4px rgba(0,0,0,.07);flex-shrink:0;}
+.nbtn{background:none;border:1px solid transparent;border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;color:#8B4513;transition:background .15s,border-color .15s;flex-shrink:0;}
 .nbtn:hover{background:rgba(139,69,19,.1);border-color:#D4AA7D;}
-#abar-wrap{flex:1;display:flex;align-items:center;background:white;border:2px solid #D4AA7D;border-radius:20px;padding:0 10px;gap:6px;transition:border-color .2s,box-shadow .2s;}
+#abar-wrap{flex:1;display:flex;align-items:center;background:white;border:2px solid #D4AA7D;border-radius:20px;padding:0 8px;gap:5px;transition:border-color .2s,box-shadow .2s;}
 #abar-wrap:focus-within{border-color:var(--golden);box-shadow:0 0 0 3px rgba(244,163,64,.2);}
-#abar{flex:1;border:none;outline:none;font-family:'Fira Code',monospace;font-size:13px;color:#2C1810;background:transparent;padding:4px 0;}
-#go-btn{background:var(--golden);border:none;border-radius:14px;padding:5px 14px;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:white;cursor:pointer;flex-shrink:0;transition:background .15s;}
+#abar{flex:1;border:none;outline:none;font-family:'Fira Code',monospace;font-size:12px;color:#2C1810;background:transparent;padding:3px 0;}
+#go-btn{background:var(--golden);border:none;border-radius:14px;padding:3px 11px;font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;color:white;cursor:pointer;flex-shrink:0;transition:background .15s;}
 #go-btn:hover{background:#D08010;}
-#dev-btn{background:#2C1810;color:var(--golden);border:none;border-radius:6px;padding:6px 12px;font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;cursor:pointer;flex-shrink:0;white-space:nowrap;transition:background .15s;}
+#dev-btn{background:#2C1810;color:var(--golden);border:none;border-radius:6px;padding:4px 9px;font-family:'Nunito',sans-serif;font-weight:800;font-size:10px;cursor:pointer;flex-shrink:0;white-space:nowrap;transition:background .15s;}
 #dev-btn:hover{background:#4A2518;}
 
 /* CONTENT */
@@ -50,81 +50,81 @@ body{font-family:'Nunito',sans-serif;background:#C8A882;height:100vh;overflow:hi
 .tab-pane.active{display:block;}
 
 /* NEW TAB */
-.nt-page{width:100%;height:100%;overflow-y:auto;background:linear-gradient(145deg,#FFF8F0,#FFE8CC,#FFD4A0);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:30px;}
+.nt-page{width:100%;height:100%;overflow-y:auto;background:linear-gradient(145deg,#FFF8F0,#FFE8CC,#FFD4A0);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;}
 @keyframes wag{0%{transform:rotate(-6deg) scale(.85);opacity:0}60%{transform:rotate(7deg) scale(1.05)}100%{transform:rotate(0) scale(1);opacity:1}}
 .nt-logo{text-align:center;animation:wag .5s ease-out;}
-.nt-dog{font-size:60px;}
-.nt-title{font-size:44px;font-weight:900;color:#5C3317;letter-spacing:-1px;}
+.nt-dog{font-size:42px;}
+.nt-title{font-size:32px;font-weight:900;color:#5C3317;letter-spacing:-1px;}
 .nt-title b{color:var(--golden);}
-.nt-sub{color:#A07050;font-size:13px;font-weight:600;margin-top:4px;}
-.nt-sbar{display:flex;width:min(520px,90%);background:white;border-radius:26px;border:2px solid #D4AA7D;overflow:hidden;box-shadow:0 4px 18px rgba(139,69,19,.14);}
-.nt-sbar input{flex:1;border:none;outline:none;padding:13px 18px;font-family:'Nunito',sans-serif;font-size:15px;background:transparent;color:#2C1810;}
-.nt-sbar button{background:var(--golden);border:none;padding:13px 22px;font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:white;cursor:pointer;}
+.nt-sub{color:#A07050;font-size:11px;font-weight:600;margin-top:3px;}
+.nt-sbar{display:flex;width:min(420px,90%);background:white;border-radius:26px;border:2px solid #D4AA7D;overflow:hidden;box-shadow:0 4px 18px rgba(139,69,19,.14);}
+.nt-sbar input{flex:1;border:none;outline:none;padding:9px 14px;font-family:'Nunito',sans-serif;font-size:13px;background:transparent;color:#2C1810;}
+.nt-sbar button{background:var(--golden);border:none;padding:9px 16px;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;color:white;cursor:pointer;}
 .nt-sbar button:hover{background:#D08010;}
 .nt-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
-.abtn{background:white;border:2px solid #D4AA7D;border-radius:10px;padding:9px 16px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#8B4513;cursor:pointer;transition:background .15s,transform .1s;display:flex;align-items:center;gap:5px;}
+.abtn{background:white;border:2px solid #D4AA7D;border-radius:10px;padding:6px 12px;font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;color:#8B4513;cursor:pointer;transition:background .15s,transform .1s;display:flex;align-items:center;gap:5px;}
 .abtn:hover{background:#FFF0DC;transform:translateY(-1px);}
 .nt-sites{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;max-width:600px;}
-.scrd{background:white;border-radius:12px;padding:14px 18px;text-align:center;cursor:pointer;box-shadow:0 2px 8px rgba(139,69,19,.09);border:1px solid #E8D5C0;transition:transform .15s,box-shadow .15s;min-width:90px;}
+.scrd{background:white;border-radius:12px;padding:10px 12px;text-align:center;cursor:pointer;box-shadow:0 2px 8px rgba(139,69,19,.09);border:1px solid #E8D5C0;transition:transform .15s,box-shadow .15s;min-width:90px;}
 .scrd:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(139,69,19,.18);}
-.scrd-icon{font-size:26px;}
-.scrd-name{font-size:11px;font-weight:700;color:#8B4513;margin-top:4px;}
+.scrd-icon{font-size:20px;}
+.scrd-name{font-size:10px;font-weight:700;color:#8B4513;margin-top:3px;}
 
 /* BUILTIN PAGES */
 .bp{width:100%;height:100%;overflow-y:auto;background:var(--cream);}
-.srp{padding:28px 36px;font-family:'Nunito',sans-serif;max-width:780px;margin:0 auto;}
+.srp{padding:18px 24px;font-family:'Nunito',sans-serif;max-width:780px;margin:0 auto;}
 .srp-hdr{display:flex;align-items:center;gap:10px;margin-bottom:22px;}
-.srp-hdr h2{font-size:20px;color:#5C3317;font-weight:900;}
+.srp-hdr h2{font-size:16px;color:#5C3317;font-weight:900;}
 .srp-hdr small{color:#A07050;font-size:13px;}
-.rc{background:white;border:1px solid #E8D5C0;border-radius:12px;padding:15px 18px;margin-bottom:12px;cursor:pointer;transition:box-shadow .15s,border-color .15s;}
+.rc{background:white;border:1px solid #E8D5C0;border-radius:12px;padding:15px 18px;margin-bottom:9px;cursor:pointer;transition:box-shadow .15s,border-color .15s;}
 .rc:hover{box-shadow:0 4px 12px rgba(139,69,19,.1);border-color:var(--golden);}
-.rc-dom{font-size:11px;color:var(--grass);font-weight:700;margin-bottom:3px;font-family:'Fira Code',monospace;}
-.rc-ttl{font-size:16px;font-weight:800;color:#2C1810;margin-bottom:5px;}
-.rc-dsc{font-size:13px;color:#7A6050;line-height:1.5;}
+.rc-dom{font-size:10px;color:var(--grass);font-weight:700;margin-bottom:3px;font-family:'Fira Code',monospace;}
+.rc-ttl{font-size:11px;font-weight:800;color:#2C1810;margin-bottom:3px;}
+.rc-dsc{font-size:11px;color:#7A6050;line-height:1.4;}
 .no-res{text-align:center;padding:60px 20px;color:#A07050;font-size:15px;}
-.no-res .ni{font-size:48px;margin-bottom:12px;}
-.asp{padding:28px 36px;font-family:'Nunito',sans-serif;}
-.asp h2{font-size:22px;font-weight:900;color:#5C3317;margin-bottom:18px;}
-.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;}
-.sgc{background:white;border:1px solid #E8D5C0;border-radius:12px;padding:18px;cursor:pointer;text-align:center;transition:box-shadow .15s,transform .15s;}
+.no-res .ni{font-size:48px;margin-bottom:9px;}
+.asp{padding:18px 24px;font-family:'Nunito',sans-serif;}
+.asp h2{font-size:18px;font-weight:900;color:#5C3317;margin-bottom:18px;}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:9px;}
+.sgc{background:white;border:1px solid #E8D5C0;border-radius:12px;padding:12px;cursor:pointer;text-align:center;transition:box-shadow .15s,transform .15s;}
 .sgc:hover{box-shadow:0 4px 14px rgba(139,69,19,.12);transform:translateY(-2px);}
-.sgc-icon{font-size:30px;margin-bottom:8px;}
-.sgc-name{font-size:13px;font-weight:800;color:#2C1810;}
-.sgc-dom{font-size:11px;color:var(--grass);font-family:'Fira Code',monospace;margin-top:2px;}
-.adp{padding:28px 36px;font-family:'Nunito',sans-serif;max-width:740px;margin:0 auto;}
+.sgc-icon{font-size:24px;margin-bottom:5px;}
+.sgc-name{font-size:11px;font-weight:800;color:#2C1810;}
+.sgc-dom{font-size:10px;color:var(--grass);font-family:'Fira Code',monospace;margin-top:1px;}
+.adp{padding:18px 24px;font-family:'Nunito',sans-serif;max-width:740px;margin:0 auto;}
 .adp h2{font-size:24px;font-weight:900;color:#5C3317;margin-bottom:6px;}
 .badge{display:inline-block;background:var(--grass);color:white;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;margin-left:8px;vertical-align:middle;}
 .adp h3{font-size:15px;font-weight:800;color:#8B4513;margin:18px 0 8px;}
 .adp p{color:#6A5040;font-size:13px;line-height:1.6;margin-bottom:8px;}
-.acode{background:#1A0A04;color:#E8D5B0;border-radius:8px;padding:14px;font-family:'Fira Code',monospace;font-size:12px;line-height:1.7;overflow-x:auto;margin-bottom:12px;border:1px solid #3A2010;}
+.acode{background:#1A0A04;color:#E8D5B0;border-radius:8px;padding:14px;font-family:'Fira Code',monospace;font-size:12px;line-height:1.7;overflow-x:auto;margin-bottom:9px;border:1px solid #3A2010;}
 .acode .kw{color:#FF9A5C;}.acode .st{color:#A8D8A0;}.acode .fn{color:#87CEEB;}.acode .cm{color:#7A6050;}
 
 /* NOT FOUND */
 .nfw{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--cream);}
 .nfb{text-align:center;font-family:'Nunito',sans-serif;padding:40px;}
 @keyframes shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
-.nf-icon{font-size:72px;display:block;margin-bottom:14px;animation:shake .5s ease;}
-.nfb h2{font-size:24px;font-weight:900;color:#5C3317;margin-bottom:10px;}
+.nf-icon{font-size:52px;display:block;margin-bottom:10px;animation:shake .5s ease;}
+.nfb h2{font-size:18px;font-weight:900;color:#5C3317;margin-bottom:8px;}
 .nfb p{color:#A07050;font-size:13px;max-width:320px;line-height:1.6;margin:0 auto 16px;}
 .nf-btn{background:var(--golden);border:none;border-radius:10px;color:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;padding:9px 22px;cursor:pointer;margin:0 4px;}
 .nf-btn.dk{background:#2C1810;}
 
 /* STATUS */
-#status-bar{background:#5C3317;padding:2px 12px;display:flex;align-items:center;gap:14px;font-size:11px;color:#C8A882;font-family:'Fira Code',monospace;flex-shrink:0;}
+#status-bar{background:#5C3317;padding:1px 10px;display:flex;align-items:center;gap:10px;font-size:10px;color:#C8A882;font-family:'Fira Code',monospace;flex-shrink:0;}
 .dot{width:7px;height:7px;border-radius:50%;background:#4CAF50;display:inline-block;margin-right:3px;}
 
 /* AUTH MODAL */
 #auth-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:3000;align-items:center;justify-content:center;}
 #auth-modal.open{display:flex;}
-.auth-box{background:linear-gradient(145deg,#2C1810,#3A1808);border-radius:18px;padding:34px;width:360px;box-shadow:0 24px 60px rgba(0,0,0,.6);border:1px solid #5C3317;font-family:'Nunito',sans-serif;}
-.auth-dog{font-size:52px;text-align:center;margin-bottom:6px;animation:wag .5s ease-out;}
-.auth-title{font-size:22px;font-weight:900;color:var(--golden);text-align:center;margin-bottom:4px;}
-.auth-sub{font-size:12px;color:#A07050;text-align:center;margin-bottom:22px;}
+.auth-box{background:linear-gradient(145deg,#2C1810,#3A1808);border-radius:18px;padding:24px;width:320px;box-shadow:0 24px 60px rgba(0,0,0,.6);border:1px solid #5C3317;font-family:'Nunito',sans-serif;}
+.auth-dog{font-size:40px;text-align:center;margin-bottom:6px;animation:wag .5s ease-out;}
+.auth-title{font-size:18px;font-weight:900;color:var(--golden);text-align:center;margin-bottom:4px;}
+.auth-sub{font-size:11px;color:#A07050;text-align:center;margin-bottom:16px;}
 .auth-tabs{display:flex;margin-bottom:20px;border-radius:8px;overflow:hidden;border:1px solid #5C3317;}
 .atab{flex:1;padding:8px;text-align:center;font-weight:800;font-size:13px;cursor:pointer;color:#A07050;background:none;border:none;font-family:'Nunito',sans-serif;transition:background .15s,color .15s;}
 .atab.on{background:var(--golden);color:#1E0F08;}
 .af{margin-bottom:13px;}
-.af label{display:block;color:#C8A882;font-size:11px;font-weight:700;margin-bottom:4px;}
+.af label{display:block;color:#C8A882;font-size:10px;font-weight:700;margin-bottom:4px;}
 .af input{width:100%;background:#1E0F08;border:1px solid #4A2518;border-radius:8px;color:#E8D5B0;font-family:'Nunito',sans-serif;font-size:14px;padding:9px 12px;outline:none;transition:border-color .15s;}
 .af input:focus{border-color:var(--golden);}
 #auth-err{color:#FF7070;font-size:12px;font-weight:700;margin-bottom:10px;min-height:16px;text-align:center;}
@@ -135,36 +135,36 @@ body{font-family:'Nunito',sans-serif;background:#C8A882;height:100vh;overflow:hi
 /* DEV MODAL */
 #dev-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:1000;align-items:center;justify-content:center;}
 #dev-modal.open{display:flex;}
-.dw{background:#1E0F08;border-radius:14px;width:min(960px,96vw);height:min(680px,93vh);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.65);border:1px solid #3A2010;}
-.dtb{background:linear-gradient(135deg,#3A1808,#5C2810);padding:11px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.dtb h3{color:var(--golden);font-size:14px;font-weight:900;flex:1;}
-.dtb .du{color:#C8A882;font-size:11px;font-weight:700;background:rgba(255,255,255,.08);padding:3px 10px;border-radius:20px;}
+.dw{background:#1E0F08;border-radius:14px;width:min(880px,96vw);height:min(600px,93vh);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.65);border:1px solid #3A2010;}
+.dtb{background:linear-gradient(135deg,#3A1808,#5C2810);padding:8px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.dtb h3{color:var(--golden);font-size:12px;font-weight:900;flex:1;}
+.dtb .du{color:#C8A882;font-size:10px;font-weight:700;background:rgba(255,255,255,.08);padding:3px 10px;border-radius:20px;}
 .dx{background:none;border:none;color:#A07050;font-size:18px;cursor:pointer;padding:2px 6px;border-radius:4px;transition:color .15s;}
 .dx:hover{color:white;}
 .dbody{display:flex;flex:1;overflow:hidden;}
-.dsb{width:200px;background:#150904;border-right:1px solid #3A2010;display:flex;flex-direction:column;flex-shrink:0;}
-.dsb-title{padding:10px 12px;font-size:10px;font-weight:800;color:#8B6040;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #2A1008;}
+.dsb{width:175px;background:#150904;border-right:1px solid #3A2010;display:flex;flex-direction:column;flex-shrink:0;}
+.dsb-title{padding:7px 10px;font-size:9px;font-weight:800;color:#8B6040;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #2A1008;}
 #site-list{flex:1;overflow-y:auto;}
-.sli{padding:9px 12px;font-size:12px;font-weight:700;color:#C8A882;cursor:pointer;transition:background .1s;display:flex;align-items:center;gap:6px;border-bottom:1px solid #1E0F08;overflow:hidden;}
+.sli{padding:7px 10px;font-size:10px;font-weight:700;color:#C8A882;cursor:pointer;transition:background .1s;display:flex;align-items:center;gap:6px;border-bottom:1px solid #1E0F08;overflow:hidden;}
 .sli:hover{background:#2C1810;}
 .sli.on{background:#3A1808;color:var(--golden);}
 .pdot{margin-left:auto;color:#4CAF50;font-size:10px;flex-shrink:0;}
-.dsb-acts{padding:8px;border-top:1px solid #2A1008;display:flex;flex-direction:column;gap:5px;}
-.da{background:none;border:1px solid #4A2518;border-radius:6px;color:#C8A882;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;padding:7px;cursor:pointer;transition:background .1s,border-color .1s;text-align:center;width:100%;}
+.dsb-acts{padding:6px;border-top:1px solid #2A1008;display:flex;flex-direction:column;gap:5px;}
+.da{background:none;border:1px solid #4A2518;border-radius:6px;color:#C8A882;font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;padding:5px;cursor:pointer;transition:background .1s,border-color .1s;text-align:center;width:100%;}
 .da:hover{background:#2C1810;border-color:var(--golden);color:var(--golden);}
 .da.pr{background:var(--golden);border-color:var(--golden);color:#1E0F08;}
 .da.pr:hover{background:#D08010;}
 .da.dr{border-color:#8B0000;color:#FF6B6B;}
 .da.dr:hover{background:#3A0808;}
 .dea{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-.sib{background:#2C1810;padding:7px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #3A2010;flex-shrink:0;flex-wrap:wrap;}
-.sib label{color:#8B6040;font-size:11px;font-weight:700;}
+.sib{background:#2C1810;padding:5px 10px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #3A2010;flex-shrink:0;flex-wrap:wrap;}
+.sib label{color:#8B6040;font-size:10px;font-weight:700;}
 .sib input{background:#1E0F08;border:1px solid #4A2518;border-radius:5px;color:#E8D5B0;font-size:12px;padding:4px 7px;outline:none;transition:border-color .15s;}
 .sib input:focus{border-color:var(--golden);}
 #cur-dom{color:var(--golden);font-family:'Fira Code',monospace;font-size:12px;}
-#file-tabs{background:#1E0F08;display:flex;align-items:flex-end;padding:6px 6px 0;gap:2px;border-bottom:1px solid #3A2010;overflow-x:auto;scrollbar-width:none;flex-shrink:0;}
+#file-tabs{background:#1E0F08;display:flex;align-items:flex-end;padding:4px 4px 0;gap:2px;border-bottom:1px solid #3A2010;overflow-x:auto;scrollbar-width:none;flex-shrink:0;}
 #file-tabs::-webkit-scrollbar{display:none;}
-.ftab{padding:5px 10px;font-size:11px;font-weight:700;color:#8B6040;cursor:pointer;border-radius:5px 5px 0 0;background:#150904;border:1px solid #2A1008;border-bottom:none;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:background .1s,color .1s;}
+.ftab{padding:3px 8px;font-size:10px;font-weight:700;color:#8B6040;cursor:pointer;border-radius:5px 5px 0 0;background:#150904;border:1px solid #2A1008;border-bottom:none;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:background .1s,color .1s;}
 .ftab.on{background:#2C1810;color:var(--golden);border-color:#4A2518;}
 .fx{opacity:.45;font-size:12px;line-height:1;}
 .fx:hover{opacity:1;}
@@ -172,12 +172,12 @@ body{font-family:'Nunito',sans-serif;background:#C8A882;height:100vh;overflow:hi
 #add-file:hover{color:var(--golden);}
 .editor-wrap{flex:1;position:relative;overflow:hidden;}
 #editor{width:100%;height:100%;background:#1A0A04;color:#E8D5B0;border:none;outline:none;font-family:'Fira Code',monospace;font-size:13px;line-height:1.6;padding:14px;resize:none;tab-size:2;}
-.etb{background:#150904;padding:7px 12px;display:flex;align-items:center;gap:8px;border-top:1px solid #2A1008;flex-shrink:0;}
-.etb label{color:#8B6040;font-size:11px;font-weight:700;}
+.etb{background:#150904;padding:5px 10px;display:flex;align-items:center;gap:6px;border-top:1px solid #2A1008;flex-shrink:0;}
+.etb label{color:#8B6040;font-size:10px;font-weight:700;}
 .etb select{background:#2C1810;color:#C8A882;border:1px solid #4A2518;border-radius:4px;padding:4px 7px;font-family:'Nunito',sans-serif;font-size:11px;}
-.sbtn{background:#4A2598;border:none;border-radius:6px;color:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;padding:6px 14px;cursor:pointer;transition:background .15s;}
+.sbtn{background:#4A2598;border:none;border-radius:6px;color:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;padding:4px 10px;cursor:pointer;transition:background .15s;}
 .sbtn:hover{background:#6A45B8;}
-.lbtn{background:var(--grass);border:none;border-radius:6px;color:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;padding:6px 14px;cursor:pointer;margin-left:auto;transition:background .15s;}
+.lbtn{background:var(--grass);border:none;border-radius:6px;color:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;padding:4px 10px;cursor:pointer;margin-left:auto;transition:background .15s;}
 .lbtn:hover{background:#3A9A3A;}
 #prev-frame{width:100%;height:100%;border:none;display:none;}
 #prev-frame.on{display:block;}
@@ -185,10 +185,10 @@ body{font-family:'Nunito',sans-serif;background:#C8A882;height:100vh;overflow:hi
 /* NEW SITE */
 #ns-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;align-items:center;justify-content:center;}
 #ns-modal.open{display:flex;}
-.nsb{background:#2C1810;border-radius:14px;padding:26px;width:380px;box-shadow:0 20px 50px rgba(0,0,0,.5);border:1px solid #5C3317;font-family:'Nunito',sans-serif;}
-.nsb h3{color:var(--golden);font-size:18px;font-weight:900;margin-bottom:16px;}
-.nf2{margin-bottom:12px;}
-.nf2 label{display:block;color:#C8A882;font-size:11px;font-weight:700;margin-bottom:4px;}
+.nsb{background:#2C1810;border-radius:14px;padding:20px;width:340px;box-shadow:0 20px 50px rgba(0,0,0,.5);border:1px solid #5C3317;font-family:'Nunito',sans-serif;}
+.nsb h3{color:var(--golden);font-size:15px;font-weight:900;margin-bottom:9px;}
+.nf2{margin-bottom:9px;}
+.nf2 label{display:block;color:#C8A882;font-size:10px;font-weight:700;margin-bottom:4px;}
 .nf2 input,.nf2 select{width:100%;background:#1E0F08;border:1px solid #4A2518;border-radius:7px;color:#E8D5B0;font-family:'Fira Code',monospace;font-size:13px;padding:8px 10px;outline:none;transition:border-color .15s;}
 .nf2 input:focus,.nf2 select:focus{border-color:var(--golden);}
 .ns-acts{display:flex;gap:8px;margin-top:16px;}
@@ -198,7 +198,7 @@ body{font-family:'Nunito',sans-serif;background:#C8A882;height:100vh;overflow:hi
 .ns-ok:hover{background:#D08010;}
 
 /* TOAST */
-#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);background:#2C1810;color:#FFF8F0;border:1px solid var(--golden);border-radius:10px;padding:10px 20px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;z-index:9999;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);background:#2C1810;color:#FFF8F0;border:1px solid var(--golden);border-radius:10px;padding:7px 16px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;z-index:9999;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
@@ -235,8 +235,6 @@ body{font-family:'Nunito',sans-serif;background:#C8A882;height:100vh;overflow:hi
 
 <!-- STATUS -->
 <div id="status-bar">
-  <span><span class="dot"></span>Realtime DB</span>
-  <span><span class="dot"></span>Firestore</span>
   <span id="status-msg">DogWeb ready 🐾</span>
 </div>
 
@@ -316,9 +314,6 @@ body{font-family:'Nunito',sans-serif;background:#C8A882;height:100vh;overflow:hi
         <option value="blank">Blank</option>
         <option value="hello">Hello World</option>
         <option value="landing">Landing Page</option>
-        <option value="rtdb">Realtime DB App</option>
-        <option value="firestore">Firestore App</option>
-        <option value="chat">Live Chat (RTDB)</option>
       </select>
     </div>
     <div class="ns-acts">
@@ -332,7 +327,6 @@ body{font-family:'Nunito',sans-serif;background:#C8A882;height:100vh;overflow:hi
 
 <!-- Firebase loaded AFTER DOM, before our script -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
 <script>
@@ -349,7 +343,6 @@ const FB = {
   appId:"1:1070451769959:web:2b5e5b5a2bba0711340ac2"
 };
 firebase.initializeApp(FB);
-const RTDB = firebase.database();
 const FS   = firebase.firestore();
 
 // ═══════════════════════════════════════════════════════════
@@ -478,7 +471,6 @@ async function deleteSiteFS(domain){
 const BUILTINS = {
   doggle:  { title:'Doggle Search',  favicon:'🔍', desc:'The #1 search engine on DogWeb' },
   sites:   { title:'All Sites',      favicon:'📋', desc:'Browse all .dog sites' },
-  apidocs: { title:'API Docs',       favicon:'📚', desc:'Free Realtime DB & Firestore APIs' }
 };
 
 // ═══════════════════════════════════════════════════════════
@@ -590,13 +582,14 @@ function loadURL(tabId, url, push){
 }
 
 async function resolveUserSite(tab, domain){
-  // check local cache first
-  let site = (sites[domain]&&sites[domain].published) ? sites[domain] : null;
+  // Check local cache first (works even offline)
+  let site = (sites[domain] && sites[domain].published) ? sites[domain] : null;
+  // If not in local cache, try Firestore
   if(!site){
     try{
       const doc=await FS.collection('dogweb_sites').doc(domain).get();
-      if(doc.exists&&doc.data().published) site=doc.data();
-    } catch(e){}
+      if(doc.exists && doc.data().published) site=doc.data();
+    } catch(e){ /* ignore - will show not found */ }
   }
   if(site){
     tab.title=site.title||domain; tab.favicon=site.favicon||'🌐';
@@ -652,7 +645,6 @@ function buildNewTab(tab){
     </div>
     <div class="nt-actions">
       <button class="abtn" id="${sid}_sites">📋 All Sites</button>
-      <button class="abtn" id="${sid}_api">📚 API Docs</button>
       <button class="abtn" id="${sid}_dev">⚙️ Build a Site</button>
     </div>
     <div class="nt-sites" id="${sid}_cards"></div>`;
@@ -667,7 +659,6 @@ function buildNewTab(tab){
   document.getElementById(sid).addEventListener('keydown',e=>{ if(e.key==='Enter') ntSearch(); });
   document.getElementById(sid+'_go').addEventListener('click', ntSearch);
   document.getElementById(sid+'_sites').addEventListener('click',()=>navTo('sites.dog'));
-  document.getElementById(sid+'_api').addEventListener('click',()=>navTo('apidocs.dog'));
   document.getElementById(sid+'_dev').addEventListener('click', openDev);
 
   // quick site cards
@@ -688,19 +679,42 @@ function buildNewTab(tab){
 function buildBuiltin(tab, domain, query){
   const wrap=document.createElement('div');
   wrap.className='bp';
+  tab.pane.appendChild(wrap);
   if(domain==='doggle') buildSearch(wrap, query);
   else if(domain==='sites') buildAllSites(wrap);
-  else if(domain==='apidocs') buildApiDocs(wrap);
-  tab.pane.appendChild(wrap);
 }
 
-function buildSearch(wrap, query){
+async function buildSearch(wrap, query){
   const div=document.createElement('div');
   div.className='srp';
-  const results=getResults(query);
+  wrap.appendChild(div);
+
+  // Always start with builtins + any locally known published sites
+  const localPublished = Object.entries(sites)
+    .filter(([,s])=>s.published)
+    .reduce((acc,[d,s])=>{ acc[d]=s; return acc; },{});
+
+  // Try to also fetch from Firestore (may fail if not logged in / rules block it)
+  let fsPublished={};
+  try{
+    const snap=await FS.collection('dogweb_sites').where('published','==',true).get();
+    snap.forEach(doc=>{ fsPublished[doc.id]=doc.data(); });
+  } catch(e){ /* offline or rules blocked — use local only */ }
+
+  // Merge: Firestore wins over local for same domain
+  const allPublished = Object.assign({}, localPublished, fsPublished);
+
+  const q=(query||'').toLowerCase();
+  const all=[
+    {domain:'doggle', title:'Doggle Search',    favicon:'🔍', desc:'The #1 search engine on DogWeb.'},
+    {domain:'sites',  title:'All DogWeb Sites',  favicon:'📋', desc:'Browse every published site on the .dog internet.'},
+    ...Object.entries(allPublished).map(([d,s])=>({domain:d,title:s.title||d,favicon:s.favicon||'🌐',desc:'A user-built site on DogWeb'}))
+  ];
+  const results = q ? all.filter(r=>(r.title+r.domain+r.desc).toLowerCase().includes(q)) : all;
+
   let h=`<div class="srp-hdr"><span>🔍</span><div><h2>${esc(query)||'DogWeb Search'}</h2><small>${results.length} result${results.length!==1?'s':''}</small></div></div>`;
   if(!results.length){
-    h+=`<div class="no-res"><div class="ni">🐕</div><p>No results for "<strong>${esc(query)}</strong>".</p></div>`;
+    h+=`<div class="no-res"><div class="ni">🐕</div><p>No results for "<strong>${esc(query)}</strong>".<br>Try building it yourself!</p></div>`;
   } else {
     results.forEach(r=>{
       h+=`<div class="rc" data-url="${esc(r.domain)}.dog"><div class="rc-dom">${r.favicon} ${esc(r.domain)}.dog</div><div class="rc-ttl">${esc(r.title)}</div><div class="rc-dsc">${esc(r.desc)}</div></div>`;
@@ -710,99 +724,72 @@ function buildSearch(wrap, query){
   div.querySelectorAll('.rc[data-url]').forEach(el=>{
     el.addEventListener('click',()=>navTo(el.dataset.url));
   });
-  wrap.appendChild(div);
-}
-
-function getResults(query){
-  const q=(query||'').toLowerCase();
-  const all=[
-    {domain:'doggle', title:'Doggle Search', favicon:'🔍', desc:'The #1 search engine on DogWeb.'},
-    {domain:'sites',  title:'All DogWeb Sites',favicon:'📋', desc:'Browse every published site on the .dog internet.'},
-    {domain:'apidocs',title:'API Docs',       favicon:'📚', desc:'Free Realtime DB & Firestore APIs — no setup needed.'},
-    ...Object.entries(sites).filter(([,s])=>s.published).map(([d,s])=>({domain:d,title:s.title||d,favicon:s.favicon||'🌐',desc:'A user-built site on DogWeb'}))
-  ];
-  if(!q) return all;
-  return all.filter(r=>(r.title+r.domain+r.desc).toLowerCase().includes(q));
 }
 
 async function buildAllSites(wrap){
   const div=document.createElement('div');
   div.className='asp';
-  div.innerHTML='<h2>📋 All Sites on DogWeb</h2><div class="sgrid" id="__asg"></div>';
+  const grid=document.createElement('div');
+  grid.className='sgrid';
+  div.innerHTML='<h2>📋 All Sites on DogWeb</h2>';
+  div.appendChild(grid);
   wrap.appendChild(div);
-  const grid=$id('__asg');
-  // builtins
-  [['doggle','Doggle','🔍'],['apidocs','API Docs','📚'],['sites','All Sites','📋']].forEach(([d,t,f])=>{
+
+  // Builtin sites always show
+  [['doggle','Doggle','🔍'],['sites','All Sites','📋']].forEach(([d,t,f])=>{
     const c=document.createElement('div'); c.className='sgc';
     c.innerHTML=`<div class="sgc-icon">${f}</div><div class="sgc-name">${t}</div><div class="sgc-dom">${d}.dog</div>`;
     c.addEventListener('click',()=>navTo(d+'.dog'));
     grid.appendChild(c);
   });
+
+  // Collect published sites: local cache first, then Firestore
+  const allPublished = Object.assign(
+    {},
+    // local
+    Object.entries(sites).filter(([,s])=>s.published).reduce((a,[d,s])=>{ a[d]=s; return a; },{}),
+  );
+
+  // Try Firestore too
   try{
     const snap=await FS.collection('dogweb_sites').where('published','==',true).get();
-    snap.forEach(doc=>{
-      const s=doc.data();
+    snap.forEach(doc=>{ allPublished[doc.id]=doc.data(); });
+  } catch(e){ /* use local only */ }
+
+  const userSites = Object.entries(allPublished);
+  if(userSites.length===0){
+    const empty=document.createElement('div'); empty.className='sgc';
+    empty.style.cssText='border:2px dashed #D4AA7D;cursor:pointer;';
+    empty.innerHTML='<div class="sgc-icon">➕</div><div class="sgc-name">Build a site!</div><div class="sgc-dom">yours.dog</div>';
+    empty.addEventListener('click', openDev);
+    grid.appendChild(empty);
+  } else {
+    userSites.forEach(([domain,s])=>{
       const c=document.createElement('div'); c.className='sgc';
-      c.innerHTML=`<div class="sgc-icon">${s.favicon||'🌐'}</div><div class="sgc-name">${esc(s.title||doc.id)}</div><div class="sgc-dom">${esc(doc.id)}.dog</div>`;
-      c.addEventListener('click',()=>navTo(doc.id+'.dog'));
+      c.innerHTML=`<div class="sgc-icon">${s.favicon||'🌐'}</div><div class="sgc-name">${esc(s.title||domain)}</div><div class="sgc-dom">${esc(domain)}.dog</div>`;
+      c.addEventListener('click',()=>navTo(domain+'.dog'));
       grid.appendChild(c);
     });
-  } catch(e){ console.error(e); }
+  }
 }
 
-function buildApiDocs(wrap){
-  wrap.innerHTML=`<div class="adp">
-<h2>DogWeb APIs <span class="badge">FREE</span></h2>
-<p>Every site gets both Firebase APIs auto-injected. No imports needed — just use them in your JS files!</p>
-<h3>🔥 Realtime Database</h3>
-<p>Live sync across all connected clients. Use <code>window.DogWeb.rtdb</code> or <code>window.rtdb</code>.</p>
-<div class="acode"><span class="cm">// Write data</span>
-<span class="fn">DogWeb</span>.rtdb.<span class="fn">ref</span>(<span class="st">'mysite/key'</span>).<span class="fn">set</span>({ msg: <span class="st">'hello!'</span> });
-<span class="cm">// Read once</span>
-<span class="fn">DogWeb</span>.rtdb.<span class="fn">ref</span>(<span class="st">'mysite/key'</span>).<span class="fn">once</span>(<span class="st">'value'</span>).<span class="fn">then</span>(s =&gt; console.<span class="fn">log</span>(s.<span class="fn">val</span>()));
-<span class="cm">// Live listener</span>
-<span class="fn">DogWeb</span>.rtdb.<span class="fn">ref</span>(<span class="st">'mysite/key'</span>).<span class="fn">on</span>(<span class="st">'value'</span>, s =&gt; console.<span class="fn">log</span>(s.<span class="fn">val</span>()));</div>
-<h3>🏪 Firestore</h3>
-<p>Scalable document database. Use <code>window.DogWeb.firestore</code> or <code>window.db</code>.</p>
-<div class="acode"><span class="cm">// Add doc</span>
-<span class="fn">DogWeb</span>.firestore.<span class="fn">collection</span>(<span class="st">'mysite_posts'</span>).<span class="fn">add</span>({ title: <span class="st">'Hello!'</span> });
-<span class="cm">// Query</span>
-<span class="fn">DogWeb</span>.firestore.<span class="fn">collection</span>(<span class="st">'mysite_posts'</span>).<span class="fn">get</span>().<span class="fn">then</span>(s =&gt; s.<span class="fn">forEach</span>(d =&gt; console.<span class="fn">log</span>(d.<span class="fn">data</span>())));
-<span class="cm">// Live listener</span>
-<span class="fn">DogWeb</span>.firestore.<span class="fn">collection</span>(<span class="st">'mysite_posts'</span>).<span class="fn">onSnapshot</span>(s =&gt; s.<span class="fn">forEach</span>(d =&gt; console.<span class="fn">log</span>(d.<span class="fn">data</span>())));</div>
-<h3>💡 Tips</h3>
-<p>• Prefix paths with your domain to avoid conflicts: <code>'mysite/data'</code> for RTDB, <code>'mysite_col'</code> for Firestore.</p>
-<p>• <code>firebase</code> global is available for FieldValue, Timestamp, etc.</p>
-<button id="__apidocs-devbtn" style="background:var(--golden);border:none;border-radius:10px;color:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;padding:10px 20px;cursor:pointer;margin-top:8px;">⚙️ Open Dev Tools</button>
-</div>`;
-  wrap.querySelector('#__apidocs-devbtn').addEventListener('click', openDev);
-}
+
 
 function buildUserSite(tab, site){
   const htmlFile = (site.files||{})['index.html'] || Object.values(site.files||{}).find(f=>f.type==='html');
   if(!htmlFile){ buildNotFound(tab, tab.url); return; }
   let html = htmlFile.content||'';
-  let styles='', userScripts='';
+  let styles='', scripts='';
   Object.entries(site.files||{}).forEach(([n,f])=>{
-    if(f.type==='css') styles      +=`<style>/* ${n} */\n${f.content||''}\n</style>\n`;
-    if(f.type==='js')  userScripts +=`<script>/* ${n} */\n${f.content||''}\n<\/script>\n`;
+    if(f.type==='css') styles  +=`<style>/* ${n} */\n${f.content||''}\n</style>\n`;
+    if(f.type==='js')  scripts +=`<script>/* ${n} */\n${f.content||''}\n<\/script>\n`;
   });
-
-  // Inject styles into <head>
   if(html.includes('</head>')) html=html.replace('</head>',styles+'</head>');
   else html=styles+html;
-
-  // Inject Firebase + DogWeb API + user scripts before </body>
-  // We use a full inline approach: Firebase compat libs are fetched
-  // by the iframe itself. We must NOT use sandbox so CDN scripts load.
-  // User sites run in a plain iframe (no sandbox) — same as any real browser tab.
-  const apiAndScripts = buildApiSnippet() + userScripts;
-  if(html.includes('</body>')) html=html.replace('</body>', apiAndScripts+'</body>');
-  else html=html+apiAndScripts;
-
+  if(html.includes('</body>')) html=html.replace('</body>',scripts+'</body>');
+  else html=html+scripts;
   const ifr=document.createElement('iframe');
   ifr.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:none;display:block;';
-  // No sandbox — needed so Firebase CDN scripts and the DB connections work
   tab.pane.appendChild(ifr);
   try{
     const doc=ifr.contentDocument||ifr.contentWindow.document;
@@ -810,19 +797,6 @@ function buildUserSite(tab, site){
     doc.write(html);
     doc.close();
   } catch(e){ console.error('iframe write:',e); }
-}
-
-function buildApiSnippet(){
-  return `<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"><\/script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"><\/script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"><\/script>
-<script>
-(function(){if(window.__dw)return;window.__dw=true;
-if(!firebase.apps.length)firebase.initializeApp(${JSON.stringify(FB)});
-window.rtdb=firebase.database();window.db=firebase.firestore();
-window.DogWeb={rtdb:window.rtdb,firestore:window.db,ref:p=>window.rtdb.ref(p),collection:n=>window.db.collection(n)};
-console.log('%c🐾 DogWeb APIs ready!','color:#F4A340;font-weight:bold');})();
-<\/script>`;
 }
 
 function buildNotFound(tab, domain){
@@ -991,12 +965,9 @@ function doTogglePreview(){
       if(f.type==='css') st    +=`<style>/* ${n} */\n${f.content||''}\n</style>\n`;
       if(f.type==='js')  userJs+=`<script>/* ${n} */\n${f.content||''}\n<\/script>\n`;
     });
-    const inject=buildApiSnippet()+userJs;
     if(html.includes('</head>')) html=html.replace('</head>',st+'</head>'); else html=st+html;
-    if(html.includes('</body>')) html=html.replace('</body>',inject+'</body>'); else html=html+inject;
+    if(html.includes('</body>')) html=html.replace('</body>',userJs+'</body>'); else html=html+userJs;
     dea.style.display='none'; pf.classList.add('on');
-    // No sandbox attr so Firebase CDN scripts can load
-    pf.removeAttribute('sandbox');
     try{ const doc=pf.contentDocument||pf.contentWindow.document; doc.open('text/html','replace'); doc.write(html); doc.close(); }
     catch(e){ console.error(e); }
     btn.textContent='\u270F\uFE0F Editor';
@@ -1041,7 +1012,7 @@ function guessType(n){ if(n.endsWith('.css'))return'css'; if(n.endsWith('.js'))r
 
 function fileTemplate(fname,type){
   if(type==='css') return `/* ${fname} */\nbody {\n  font-family: sans-serif;\n  margin: 0;\n  padding: 20px;\n}\n`;
-  if(type==='js')  return `/* ${fname} */\n/* APIs: DogWeb.rtdb | DogWeb.firestore */\nconsole.log('🐾 Loaded!');\n`;
+  if(type==='js')  return `/* ${fname} */\nconsole.log('🐾 Loaded!');\n`;
   return `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Page</title>\n</head>\n<body>\n  <h1>Hello!</h1>\n</body>\n</html>`;
 }
 
@@ -1055,28 +1026,16 @@ function getTemplate(domain,title,favicon,tpl){
     };
     case'landing':return{
       'index.html':T('html',`<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8"><title>${title}</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <nav><span class="logo">${favicon} ${title}</span><a href="#about">About</a></nav>\n  <section class="hero"><h1>Welcome to <span>${title}</span></h1><p>Your awesome site on DogWeb 🐾</p><button onclick="alert('Woof! 🐶')">Get Started</button></section>\n  <section id="about" class="about"><h2>About</h2><p>Built with DogWeb Dev Tools!</p></section>\n  <script src="app.js"><\/script>\n</body>\n</html>`),
-      'style.css':T('css',`*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',sans-serif;background:#FFF8F0}nav{background:#8B4513;color:white;padding:14px 30px;display:flex;gap:20px;align-items:center}.logo{font-size:20px;font-weight:800;flex:1}nav a{color:rgba(255,255,255,.85);text-decoration:none;font-weight:600}.hero{padding:80px 30px;text-align:center;background:linear-gradient(135deg,#FFF0DC,#FFD4A0)}.hero h1{font-size:48px;color:#2C1810;margin-bottom:14px}.hero h1 span{color:#8B4513}.hero p{font-size:18px;color:#6A5040;margin-bottom:26px}.hero button{background:#F4A340;border:none;border-radius:30px;padding:14px 32px;font-size:16px;font-weight:800;color:white;cursor:pointer}.about{padding:60px 30px;text-align:center}.about h2{font-size:32px;color:#5C3317;margin-bottom:12px}\n`),
+      'style.css':T('css',`*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',sans-serif;background:#FFF8F0}nav{background:#8B4513;color:white;padding:14px 30px;display:flex;gap:20px;align-items:center}.logo{font-size:20px;font-weight:800;flex:1}nav a{color:rgba(255,255,255,.85);text-decoration:none;font-weight:600}.hero{padding:80px 30px;text-align:center;background:linear-gradient(135deg,#FFF0DC,#FFD4A0)}.hero h1{font-size:48px;color:#2C1810;margin-bottom:14px}.hero h1 span{color:#8B4513}.hero p{font-size:18px;color:#6A5040;margin-bottom:26px}.hero button{background:#F4A340;border:none;border-radius:30px;padding:14px 32px;font-size:16px;font-weight:800;color:white;cursor:pointer}.about{padding:60px 30px;text-align:center}.about h2{font-size:32px;color:#5C3317;margin-bottom:9px}\n`),
       'app.js':T('js',`console.log('🐾 ${title} ready!');\n`)
     };
-    case'rtdb':return{
-      'index.html':T('html',`<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8"><title>${title}</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <h1>${favicon} ${title}</h1>\n  <div class="row"><input id="msg" placeholder="Type a message..."><button onclick="send()">Send</button></div>\n  <div id="msgs"></div>\n  <script src="app.js"><\/script>\n</body>\n</html>`),
-      'style.css':T('css',`body{font-family:sans-serif;padding:30px;background:#FFF8F0}h1{color:#8B4513;margin-bottom:16px}.row{display:flex;gap:8px;margin-bottom:20px}input{flex:1;padding:8px 12px;border:1px solid #D4AA7D;border-radius:8px;font-size:14px}button{background:#F4A340;border:none;border-radius:8px;padding:8px 18px;color:white;font-weight:700;cursor:pointer}.msg{background:white;border-left:4px solid #F4A340;border-radius:6px;padding:10px 14px;margin-bottom:8px;font-size:14px}\n`),
-      'app.js':T('js',`const ref=DogWeb.rtdb.ref('${domain}/messages');\nfunction send(){\n  const msg=document.getElementById('msg').value.trim();\n  if(!msg)return;\n  ref.push({text:msg,time:Date.now()});\n  document.getElementById('msg').value='';\n}\nref.limitToLast(30).on('value',snap=>{\n  const div=document.getElementById('msgs');\n  div.innerHTML='';\n  Object.values(snap.val()||{}).reverse().forEach(m=>{\n    const el=document.createElement('div');\n    el.className='msg';el.textContent=m.text;\n    div.appendChild(el);\n  });\n});\n`)
-    };
-    case'firestore':return{
-      'index.html':T('html',`<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8"><title>${title}</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <h1>${favicon} ${title}</h1>\n  <div class="row"><input id="note" placeholder="Add a note..."><button onclick="addNote()">Add</button></div>\n  <div id="notes"></div>\n  <script src="app.js"><\/script>\n</body>\n</html>`),
-      'style.css':T('css',`body{font-family:sans-serif;padding:30px;background:#FFF8F0}h1{color:#8B4513;margin-bottom:16px}.row{display:flex;gap:8px;margin-bottom:20px}input{flex:1;padding:8px 12px;border:1px solid #D4AA7D;border-radius:8px;font-size:14px}button{background:#4CAF50;border:none;border-radius:8px;padding:8px 18px;color:white;font-weight:700;cursor:pointer}.note{background:white;border:1px solid #E8D5C0;border-radius:8px;padding:12px;margin-bottom:8px;font-size:14px;cursor:pointer}.note:hover{background:#FFF0DC}\n`),
-      'app.js':T('js',`const col=DogWeb.firestore.collection('${domain}_notes');\nfunction addNote(){\n  const text=document.getElementById('note').value.trim();\n  if(!text)return;\n  col.add({text,createdAt:firebase.firestore.FieldValue.serverTimestamp()});\n  document.getElementById('note').value='';\n}\ncol.orderBy('createdAt','desc').onSnapshot(snap=>{\n  const div=document.getElementById('notes');\n  div.innerHTML='';\n  snap.forEach(doc=>{\n    const el=document.createElement('div');\n    el.className='note';el.textContent=doc.data().text;\n    el.onclick=()=>{if(confirm('Delete?'))col.doc(doc.id).delete();};\n    div.appendChild(el);\n  });\n});\n`)
-    };
-    case'chat':return{
-      'index.html':T('html',`<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8"><title>${title}</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <div class="chat">\n    <div class="chat-hdr">${favicon} ${title}</div>\n    <div id="msgs" class="msgs"></div>\n    <div class="bar"><input id="user" placeholder="Name" style="width:90px"><input id="txt" placeholder="Message…" onkeydown="if(event.key==='Enter')send()"><button onclick="send()">Send</button></div>\n  </div>\n  <script src="app.js"><\/script>\n</body>\n</html>`),
-      'style.css':T('css',`*{box-sizing:border-box;margin:0;padding:0}body{background:#F0E8D8;display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif}.chat{background:white;border-radius:16px;width:380px;height:480px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.15)}.chat-hdr{background:#8B4513;color:white;padding:14px;font-weight:800}.msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:7px}.bubble{background:#FFF0DC;border-radius:12px;padding:8px 13px;max-width:80%}.bubble .name{font-size:10px;font-weight:800;color:#8B4513;margin-bottom:2px}.bubble .text{font-size:13px;color:#2C1810}.bar{display:flex;gap:6px;padding:10px;border-top:1px solid #E8D5C0}.bar input{flex:1;padding:7px 10px;border:1px solid #D4AA7D;border-radius:8px;outline:none;font-size:13px}.bar button{background:#F4A340;border:none;border-radius:8px;padding:7px 14px;color:white;font-weight:700;cursor:pointer}\n`),
-      'app.js':T('js',`const ref=DogWeb.rtdb.ref('${domain}/chat');\nfunction send(){\n  const name=document.getElementById('user').value||'Dog';\n  const text=document.getElementById('txt').value.trim();\n  if(!text)return;\n  ref.push({name,text,time:Date.now()});\n  document.getElementById('txt').value='';\n}\nref.limitToLast(50).on('value',snap=>{\n  const div=document.getElementById('msgs');\n  div.innerHTML='';\n  Object.values(snap.val()||{}).forEach(m=>{\n    const el=document.createElement('div');\n    el.className='bubble';\n    el.innerHTML=\`<div class="name">\${m.name}</div><div class="text">\${m.text}</div>\`;\n    div.appendChild(el);\n  });\n  div.scrollTop=div.scrollHeight;\n});\n`)
-    };
+
+
+
     default:return{
       'index.html':T('html',`<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width,initial-scale=1.0">\n  <title>${title}</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <h1>${favicon} ${title}</h1>\n  <p>Your site on DogWeb 🐾</p>\n  <script src="app.js"><\/script>\n</body>\n</html>`),
       'style.css':T('css',`body{font-family:sans-serif;background:#FFF8F0;color:#2C1810;padding:40px;}\nh1{color:#8B4513;}\n`),
-      'app.js':T('js',`/* DogWeb APIs: DogWeb.rtdb | DogWeb.firestore */\nconsole.log('🐾 ${title} loaded!');\n`)
+      'app.js':T('js',`console.log('🐾 ${title} loaded!');\n`)
     };
   }
 }
