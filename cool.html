@@ -185,6 +185,11 @@
     <div class="msg system">Type a message below to test the worker.</div>
   </div>
 
+  <details class="config" id="debugPanel" style="display:none;">
+    <summary style="cursor:pointer; color:var(--text);">Last request sent (debug)</summary>
+    <pre id="debugOut" style="white-space:pre-wrap; word-break:break-all; font-size:11px; color:var(--muted); margin:8px 0 0;"></pre>
+  </details>
+
   <form id="chatForm">
     <input id="userInput" type="text" placeholder="Say something..." autocomplete="off" required>
     <button id="sendBtn" type="submit">Send</button>
@@ -220,6 +225,7 @@
     const secret = document.getElementById('workerSecret').value.trim();
     const playerName = document.getElementById('playerName').value.trim() || 'WebTester';
     const systemPrompt = document.getElementById('systemPrompt').value.trim();
+    const provider = document.getElementById('provider').value;
 
     addMsg(userMessage, 'user');
     input.value = '';
@@ -227,20 +233,26 @@
     statusEl.textContent = 'Sending...';
 
     try {
+      const payload = {
+        secret,
+        clientVersion: 5,
+        playerName,
+        systemPrompt,
+        history,
+        userMessage,
+        provider,
+      };
+
+      document.getElementById('debugPanel').style.display = 'block';
+      document.getElementById('debugOut').textContent = JSON.stringify(payload, null, 2);
+
       const res = await fetch(workerUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          secret,
-          clientVersion: 5,
-          playerName,
-          systemPrompt,
-          history,
-          userMessage,
-        }),
+        body: JSON.stringify(payload),
       });
 
-      statusEl.textContent = 'HTTP ' + res.status;
+      statusEl.textContent = 'HTTP ' + res.status + ' · provider: ' + provider;
 
       const raw = await res.text();
       let parsed;
