@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verity Chat Test</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --border: #2a2e38;
+    --text: #e8e9ec;
+    --muted: #8a8f9a;
+    --accent: #6c8cff;
+    --user-bubble: #2a3550;
+    --bot-bubble: #1f232c;
+    --error: #ff6b6b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+  .app {
+    width: 100%;
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  header h1 {
+    font-size: 18px;
+    margin: 0 0 4px;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .config {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .config label {
+    display: block;
+    margin-bottom: 6px;
+  }
+  .config input, .config textarea {
+    width: 100%;
+    background: #0f1115;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 12px;
+    margin-bottom: 8px;
+    font-family: inherit;
+  }
+  .config textarea { resize: vertical; min-height: 40px; }
+  .config .row { display: flex; gap: 8px; }
+  .config .row > div { flex: 1; }
+
+  #log {
+    flex: 1;
+    min-height: 320px;
+    max-height: 55vh;
+    overflow-y: auto;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .msg {
+    max-width: 80%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  .msg.user { align-self: flex-end; background: var(--user-bubble); }
+  .msg.bot { align-self: flex-start; background: var(--bot-bubble); }
+  .msg.system { align-self: center; color: var(--muted); font-size: 12px; background: none; }
+  .msg.error { align-self: flex-start; background: rgba(255,107,107,0.1); color: var(--error); border: 1px solid rgba(255,107,107,0.3); }
+
+  form {
+    display: flex;
+    gap: 8px;
+  }
+  #userInput {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    font-size: 14px;
+  }
+  button {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    background: var(--accent);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .status { font-size: 11px; color: var(--muted); text-align: right; min-height: 14px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Verity Chat — Direct Worker Test</h1>
+    <p>Calls the Cloudflare Worker straight from this page. No Minecraft involved.</p>
+  </header>
+
+  <details class="config">
+    <summary style="cursor:pointer; color:var(--text); margin-bottom:8px;">Connection settings</summary>
+    <label>Worker URL
+      <input id="workerUrl" value="https://gentle-hall-9c27.lagunajoshua750.workers.dev/">
+    </label>
+    <div class="row">
+      <div>
+        <label>Secret / token
+          <input id="workerSecret" value="verity_8F2xK9mQpL7R4nZ">
+        </label>
+      </div>
+      <div>
+        <label>Player name
+          <input id="playerName" value="WebTester">
+        </label>
+      </div>
+    </div>
+    <label>System prompt
+      <textarea id="systemPrompt">You are Verity, a friendly Minecraft AI companion. Keep replies short.</textarea>
+    </label>
+    <label>Provider (required by the worker)
+      <select id="provider">
+        <option value="groq">groq</option>
+        <option value="pollinations">pollinations</option>
+        <option value="gemini">gemini</option>
+        <option value="or-gemma4-26b">or-gemma4-26b</option>
+        <option value="or-laguna-m1">or-laguna-m1</option>
+        <option value="or-qwen3-235b">or-qwen3-235b</option>
+        <option value="or-qwen3-coder">or-qwen3-coder</option>
+        <option value="or-qwen3-next-80b">or-qwen3-next-80b</option>
+        <option value="or-deepseek-r1">or-deepseek-r1</option>
+        <option value="or-deepseek-chat">or-deepseek-chat</option>
+        <option value="or-llama4-scout">or-llama4-scout</option>
+        <option value="or-llama4-maverick">or-llama4-maverick</option>
+        <option value="or-llama33-70b">or-llama33-70b</option>
+        <option value="or-mistral-7b">or-mistral-7b</option>
+        <option value="or-hermes-405b">or-hermes-405b</option>
+        <option value="or-gpt-oss-20b">or-gpt-oss-20b</option>
+        <option value="or-nemotron-super-120b">or-nemotron-super-120b</option>
+        <option value="or-nemotron-reasoning-30b">or-nemotron-reasoning-30b</option>
+        <option value="or-nemotron-nano-30b">or-nemotron-nano-30b</option>
+        <option value="or-nemotron-nano-9b">or-nemotron-nano-9b</option>
+        <option value="or-lfm-thinking">or-lfm-thinking</option>
+        <option value="or-lfm-instruct">or-lfm-instruct</option>
+        <option value="or-north-mini-code">or-north-mini-code</option>
+        <option value="or-laguna-xs2">or-laguna-xs2</option>
+        <option value="or-owl-alpha">or-owl-alpha</option>
+      </select>
+    </label>
+  </details>
+
+  <div id="log">
+    <div class="msg system">Type a message below to test the worker.</div>
+  </div>
+
+  <form id="chatForm">
+    <input id="userInput" type="text" placeholder="Say something..." autocomplete="off" required>
+    <button id="sendBtn" type="submit">Send</button>
+  </form>
+  <div class="status" id="status"></div>
+</div>
+
+<script>
+  const log = document.getElementById('log');
+  const form = document.getElementById('chatForm');
+  const input = document.getElementById('userInput');
+  const sendBtn = document.getElementById('sendBtn');
+  const statusEl = document.getElementById('status');
+
+  // Rolling history in the { role, content } shape the worker expects.
+  let history = [];
+
+  function addMsg(text, cls) {
+    const div = document.createElement('div');
+    div.className = 'msg ' + cls;
+    div.textContent = text;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+    return div;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const userMessage = input.value.trim();
+    if (!userMessage) return;
+
+    const workerUrl = document.getElementById('workerUrl').value.trim();
+    const secret = document.getElementById('workerSecret').value.trim();
+    const playerName = document.getElementById('playerName').value.trim() || 'WebTester';
+    const systemPrompt = document.getElementById('systemPrompt').value.trim();
+
+    addMsg(userMessage, 'user');
+    input.value = '';
+    sendBtn.disabled = true;
+    statusEl.textContent = 'Sending...';
+
+    try {
+      const res = await fetch(workerUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          secret,
+          clientVersion: 5,
+          playerName,
+          systemPrompt,
+          history,
+          userMessage,
+        }),
+      });
+
+      statusEl.textContent = 'HTTP ' + res.status;
+
+      const raw = await res.text();
+      let parsed;
+      try { parsed = JSON.parse(raw); } catch { parsed = raw; }
+
+      // Unwrap a few common nesting shapes: {text}, {data:{text}}, {body:{text}}
+      let unwrapped = parsed;
+      for (let i = 0; i < 4; i++) {
+        if (typeof unwrapped === 'string') {
+          try { unwrapped = JSON.parse(unwrapped); continue; } catch { break; }
+        }
+        if (unwrapped && typeof unwrapped === 'object' && !unwrapped.text && unwrapped.body !== undefined) {
+          unwrapped = unwrapped.body; continue;
+        }
+        if (unwrapped && typeof unwrapped === 'object' && !unwrapped.text && unwrapped.data !== undefined) {
+          unwrapped = unwrapped.data; continue;
+        }
+        break;
+      }
+
+      if (!res.ok) {
+        addMsg('Server error (' + res.status + '): ' + raw, 'error');
+      } else if (unwrapped && unwrapped.error) {
+        addMsg('Worker error: ' + unwrapped.error, 'error');
+      } else if (unwrapped && unwrapped.text) {
+        addMsg(unwrapped.text, 'bot');
+        history.push({ role: 'user', content: userMessage });
+        history.push({ role: 'assistant', content: unwrapped.text });
+        if (history.length > 40) history = history.slice(-40);
+      } else {
+        addMsg('Unrecognized response shape:\n' + JSON.stringify(parsed, null, 2), 'error');
+      }
+    } catch (err) {
+      statusEl.textContent = 'Failed';
+      addMsg('Request failed: ' + err.message + '\n\n(This is often a CORS issue — the worker needs to allow requests from this page\'s origin.)', 'error');
+    } finally {
+      sendBtn.disabled = false;
+      statusEl.textContent += ' · done';
+    }
+  });
+</script>
+</body>
+</html>
